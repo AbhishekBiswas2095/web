@@ -2,21 +2,21 @@ from flask import Flask, render_template, request
 from pymysql import connections
 import os
 import boto3
-from config import *
+
 
 app = Flask(__name__)
 
 bucket = 'team-bucket-01'
 region = 'us-west-2'
 
-db_conn = connections.Connection(
-    host='team-database-01.cx5codal2rsa.us-west-2.rds.amazonaws.com',
-    port=3306,
-    user='DevOpsTeam',
-    password='Abhi1234',
-    db='team-database-01'
+from mysql.connector import (connection)
+cnx = connection.MySQLConnection(user='DevOpsTeam', 
+                                 password='Abhi1234',
+                                 host='team-database-01.cx5codal2rsa.us-west-2.rds.amazonaws.com',
+                                 database='team-database-01',
+                                 port=3306)
+cnx.close()
 
-)
 output = {}
 table = 'employee'
 
